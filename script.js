@@ -18,8 +18,12 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = (prompt("Choose Rock, Paper, or Scissors!"));
-    return choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
+    let choice;
+    do {
+        choice = (prompt("Choose Rock, Paper, or Scissors!"));
+        choice = choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase()
+    } while (choice != "Rock" && choice != "Paper" && choice != "Scissors");
+    return choice;
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -39,5 +43,17 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-playRound(getHumanChoice(), getComputerChoice());
-console.log(`Your score: ${humanScore}, computer's score: ${computerScore}`);
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        console.log(`-----Round ${i + 1}!-----`);
+        playRound(getHumanChoice(), getComputerChoice());
+    }
+    console.log(`Final score:
+    Your score: ${humanScore}
+    Computer's score: ${computerScore}`);
+    if (humanScore > computerScore) console.log("Congratilations! You win!");
+    else if (humanScore < computerScore) console.log("Unfortunately, you lost.");
+    else console.log("Anticlimactic! It's a tie.");
+}
+
+playGame();
