@@ -1,5 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
+const choices = ["Rock", "Paper", "Scissors"];
+const outcomes = [[0, -1, 1], [1, 0, -1], [-1, 1, 0]];
 
 function getComputerChoice() {
     let num = Math.floor(Math.random() * 3) + 1;
@@ -22,47 +24,18 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
     console.log(`You chose ${humanChoice}, computer chose ${computerChoice}`);
-    if ((humanChoice === "Rock" && computerChoice === "Rock") || (humanChoice === "Paper"&& computerChoice === "Paper") || (humanChoice === "Scissors" && computerChoice === "Scissors")) {
-        console.log(`It's a tie! You both chose ${humanChoice}`);
-    } else {
-        switch (humanChoice) {
-            case "Rock":
-                switch(computerChoice) {
-                    case "Paper": 
-                        console.log("You lose! Paper beats rock!");
-                        computerScore++;
-                        break;
-                    case "Scissors":
-                        console.log("You win! Rock beats scissors!");
-                        humanScore++;
-                        break;
-                }
-                break;
-            case "Paper":
-                switch(computerChoice) {
-                    case "Rock": 
-                        console.log("You win! Paper beats rock!");
-                        humanScore++;
-                        break;
-                    case "Scissors":
-                        console.log("You lose! Scissors beat paper!");
-                        computerScore++;
-                        break;
-                }
-                break;
-            case "Scissors":
-                switch(computerChoice) {
-                    case "Rock": 
-                        console.log("You lose! Rock beats scissors!");
-                        computerScore++;
-                        break;
-                    case "Paper":
-                        console.log("You win! Scissors beat paper!");
-                        humanScore++;
-                        break;
-                }
-                break;
-        }
+    switch(outcomes[choices.indexOf(humanChoice)][choices.indexOf(computerChoice)])  {
+        case -1:
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+            computerScore++;
+            break;
+        case 0:
+            console.log(`It's a tie! You both chose ${humanChoice}!`);
+            break;
+        case 1:
+            console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
+            humanScore++;
+            break;
     }
 }
 
